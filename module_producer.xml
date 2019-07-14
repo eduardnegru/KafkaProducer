@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_producer" default="compile.module.producer">
+  <dirname property="module.producer.basedir" file="${ant.file.module_producer}"/>
+  
+  <property name="module.jdk.home.producer" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.producer" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.producer" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.producer" value="-encoding UTF-8 -source 7 -target 7 ${compiler.args}"/>
+  
+  <property name="producer.output.dir" value="${module.producer.basedir}/target/classes"/>
+  <property name="producer.testoutput.dir" value="${module.producer.basedir}/target/test-classes"/>
+  
+  <path id="producer.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="producer.module.production.classpath">
+    <path refid="${module.jdk.classpath.producer}"/>
+    <path refid="library.maven:_org.apache.kafka:kafka-clients:2.0.0.classpath"/>
+    <path refid="library.maven:_org.lz4:lz4-java:1.4.1.classpath"/>
+    <path refid="library.maven:_org.xerial.snappy:snappy-java:1.1.7.1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-csv:1.5.classpath"/>
+    <path refid="library.maven:_org.json:json:20180813.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.8.0.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-speech:0.80.0-beta.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-core:1.62.0.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:26.0-android.classpath"/>
+    <path refid="library.maven:_org.checkerframework:checker-compat-qual:2.5.2.classpath"/>
+    <path refid="library.maven:_com.google.errorprone:error_prone_annotations:2.1.3.classpath"/>
+    <path refid="library.maven:_com.google.j2objc:j2objc-annotations:1.1.classpath"/>
+    <path refid="library.maven:_org.codehaus.mojo:animal-sniffer-annotations:1.14.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client:1.27.0.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.5.5.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.4.9.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.10.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath"/>
+    <path refid="library.maven:_com.google.api:api-common:1.7.0.classpath"/>
+    <path refid="library.maven:_com.google.api:gax:1.38.0.classpath"/>
+    <path refid="library.maven:_org.threeten:threetenbp:1.3.3.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java-util:3.6.1.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-common-protos:1.12.0.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-iam-v1:0.12.0.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-core-grpc:1.62.0.classpath"/>
+    <path refid="library.maven:_com.google.auth:google-auth-library-credentials:0.12.0.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:3.6.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-protobuf:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-protobuf-lite:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-context:1.17.1.classpath"/>
+    <path refid="library.maven:_com.google.api:gax-grpc:1.38.0.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-alts:1.17.1.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.5.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-cloud-speech-v1beta1:0.45.0.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-cloud-speech-v1p1beta1:0.45.0.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-cloud-speech-v1:0.45.0.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-netty-shaded:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-core:1.17.1.classpath"/>
+    <path refid="library.maven:_io.opencensus:opencensus-contrib-grpc-metrics:0.17.0.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-stub:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-auth:1.17.1.classpath"/>
+    <path refid="library.maven:_javax.annotation:javax.annotation-api:1.2.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-storage:1.59.0.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-core-http:1.59.0.classpath"/>
+    <path refid="library.maven:_com.google.auth:google-auth-library-oauth2-http:0.12.0.classpath"/>
+    <path refid="library.maven:_com.google.oauth-client:google-oauth-client:1.27.0.classpath"/>
+    <path refid="library.maven:_com.google.api-client:google-api-client:1.27.0.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client-appengine:1.27.0.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client-jackson2:1.27.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.6.classpath"/>
+    <path refid="library.maven:_com.google.api:gax-httpjson:0.52.1.classpath"/>
+    <path refid="library.maven:_io.opencensus:opencensus-api:0.15.0.classpath"/>
+    <path refid="library.maven:_io.opencensus:opencensus-contrib-http-util:0.15.0.classpath"/>
+    <path refid="library.maven:_com.google.apis:google-api-services-storage:v1-rev20181013-1.27.0.classpath"/>
+  </path>
+  
+  <path id="producer.runtime.production.module.classpath">
+    <pathelement location="${producer.output.dir}"/>
+    <path refid="library.maven:_org.apache.kafka:kafka-clients:2.0.0.classpath"/>
+    <path refid="library.maven:_org.lz4:lz4-java:1.4.1.classpath"/>
+    <path refid="library.maven:_org.xerial.snappy:snappy-java:1.1.7.1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-csv:1.5.classpath"/>
+    <path refid="library.maven:_org.json:json:20180813.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.8.0.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-speech:0.80.0-beta.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-core:1.62.0.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:26.0-android.classpath"/>
+    <path refid="library.maven:_org.checkerframework:checker-compat-qual:2.5.2.classpath"/>
+    <path refid="library.maven:_com.google.errorprone:error_prone_annotations:2.1.3.classpath"/>
+    <path refid="library.maven:_com.google.j2objc:j2objc-annotations:1.1.classpath"/>
+    <path refid="library.maven:_org.codehaus.mojo:animal-sniffer-annotations:1.14.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client:1.27.0.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.5.5.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.4.9.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.10.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath"/>
+    <path refid="library.maven:_com.google.api:api-common:1.7.0.classpath"/>
+    <path refid="library.maven:_com.google.api:gax:1.38.0.classpath"/>
+    <path refid="library.maven:_org.threeten:threetenbp:1.3.3.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java-util:3.6.1.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-common-protos:1.12.0.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-iam-v1:0.12.0.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-core-grpc:1.62.0.classpath"/>
+    <path refid="library.maven:_com.google.auth:google-auth-library-credentials:0.12.0.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:3.6.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-protobuf:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-protobuf-lite:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-context:1.17.1.classpath"/>
+    <path refid="library.maven:_com.google.api:gax-grpc:1.38.0.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-alts:1.17.1.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.5.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-grpclb:1.17.1.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-cloud-speech-v1beta1:0.45.0.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-cloud-speech-v1p1beta1:0.45.0.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-cloud-speech-v1:0.45.0.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-netty-shaded:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-core:1.17.1.classpath"/>
+    <path refid="library.maven:_io.opencensus:opencensus-contrib-grpc-metrics:0.17.0.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-stub:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-auth:1.17.1.classpath"/>
+    <path refid="library.maven:_javax.annotation:javax.annotation-api:1.2.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-storage:1.59.0.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-core-http:1.59.0.classpath"/>
+    <path refid="library.maven:_com.google.auth:google-auth-library-oauth2-http:0.12.0.classpath"/>
+    <path refid="library.maven:_com.google.oauth-client:google-oauth-client:1.27.0.classpath"/>
+    <path refid="library.maven:_com.google.api-client:google-api-client:1.27.0.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client-appengine:1.27.0.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client-jackson2:1.27.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.6.classpath"/>
+    <path refid="library.maven:_com.google.api:gax-httpjson:0.52.1.classpath"/>
+    <path refid="library.maven:_io.opencensus:opencensus-api:0.15.0.classpath"/>
+    <path refid="library.maven:_io.opencensus:opencensus-contrib-http-util:0.15.0.classpath"/>
+    <path refid="library.maven:_com.google.apis:google-api-services-storage:v1-rev20181013-1.27.0.classpath"/>
+  </path>
+  
+  <path id="producer.module.classpath">
+    <path refid="${module.jdk.classpath.producer}"/>
+    <pathelement location="${producer.output.dir}"/>
+    <path refid="library.maven:_org.apache.kafka:kafka-clients:2.0.0.classpath"/>
+    <path refid="library.maven:_org.lz4:lz4-java:1.4.1.classpath"/>
+    <path refid="library.maven:_org.xerial.snappy:snappy-java:1.1.7.1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-simple:1.7.25.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-csv:1.5.classpath"/>
+    <path refid="library.maven:_org.json:json:20180813.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.8.0.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-speech:0.80.0-beta.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-core:1.62.0.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:26.0-android.classpath"/>
+    <path refid="library.maven:_org.checkerframework:checker-compat-qual:2.5.2.classpath"/>
+    <path refid="library.maven:_com.google.errorprone:error_prone_annotations:2.1.3.classpath"/>
+    <path refid="library.maven:_com.google.j2objc:j2objc-annotations:1.1.classpath"/>
+    <path refid="library.maven:_org.codehaus.mojo:animal-sniffer-annotations:1.14.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client:1.27.0.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.5.5.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.4.9.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.10.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath"/>
+    <path refid="library.maven:_com.google.api:api-common:1.7.0.classpath"/>
+    <path refid="library.maven:_com.google.api:gax:1.38.0.classpath"/>
+    <path refid="library.maven:_org.threeten:threetenbp:1.3.3.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java-util:3.6.1.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-common-protos:1.12.0.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-iam-v1:0.12.0.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-core-grpc:1.62.0.classpath"/>
+    <path refid="library.maven:_com.google.auth:google-auth-library-credentials:0.12.0.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:3.6.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-protobuf:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-protobuf-lite:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-context:1.17.1.classpath"/>
+    <path refid="library.maven:_com.google.api:gax-grpc:1.38.0.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-alts:1.17.1.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.5.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-grpclb:1.17.1.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-cloud-speech-v1beta1:0.45.0.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-cloud-speech-v1p1beta1:0.45.0.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-cloud-speech-v1:0.45.0.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-netty-shaded:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-core:1.17.1.classpath"/>
+    <path refid="library.maven:_io.opencensus:opencensus-contrib-grpc-metrics:0.17.0.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-stub:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-auth:1.17.1.classpath"/>
+    <path refid="library.maven:_javax.annotation:javax.annotation-api:1.2.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-storage:1.59.0.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-core-http:1.59.0.classpath"/>
+    <path refid="library.maven:_com.google.auth:google-auth-library-oauth2-http:0.12.0.classpath"/>
+    <path refid="library.maven:_com.google.oauth-client:google-oauth-client:1.27.0.classpath"/>
+    <path refid="library.maven:_com.google.api-client:google-api-client:1.27.0.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client-appengine:1.27.0.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client-jackson2:1.27.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.6.classpath"/>
+    <path refid="library.maven:_com.google.api:gax-httpjson:0.52.1.classpath"/>
+    <path refid="library.maven:_io.opencensus:opencensus-api:0.15.0.classpath"/>
+    <path refid="library.maven:_io.opencensus:opencensus-contrib-http-util:0.15.0.classpath"/>
+    <path refid="library.maven:_com.google.apis:google-api-services-storage:v1-rev20181013-1.27.0.classpath"/>
+  </path>
+  
+  <path id="producer.runtime.module.classpath">
+    <pathelement location="${producer.testoutput.dir}"/>
+    <pathelement location="${producer.output.dir}"/>
+    <path refid="library.maven:_org.apache.kafka:kafka-clients:2.0.0.classpath"/>
+    <path refid="library.maven:_org.lz4:lz4-java:1.4.1.classpath"/>
+    <path refid="library.maven:_org.xerial.snappy:snappy-java:1.1.7.1.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-simple:1.7.25.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-csv:1.5.classpath"/>
+    <path refid="library.maven:_org.json:json:20180813.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.8.0.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-speech:0.80.0-beta.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-core:1.62.0.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:26.0-android.classpath"/>
+    <path refid="library.maven:_org.checkerframework:checker-compat-qual:2.5.2.classpath"/>
+    <path refid="library.maven:_com.google.errorprone:error_prone_annotations:2.1.3.classpath"/>
+    <path refid="library.maven:_com.google.j2objc:j2objc-annotations:1.1.classpath"/>
+    <path refid="library.maven:_org.codehaus.mojo:animal-sniffer-annotations:1.14.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client:1.27.0.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.5.5.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.4.9.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.10.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.2.classpath"/>
+    <path refid="library.maven:_com.google.api:api-common:1.7.0.classpath"/>
+    <path refid="library.maven:_com.google.api:gax:1.38.0.classpath"/>
+    <path refid="library.maven:_org.threeten:threetenbp:1.3.3.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java-util:3.6.1.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-common-protos:1.12.0.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-iam-v1:0.12.0.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-core-grpc:1.62.0.classpath"/>
+    <path refid="library.maven:_com.google.auth:google-auth-library-credentials:0.12.0.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:3.6.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-protobuf:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-protobuf-lite:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-context:1.17.1.classpath"/>
+    <path refid="library.maven:_com.google.api:gax-grpc:1.38.0.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-alts:1.17.1.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.5.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-grpclb:1.17.1.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-cloud-speech-v1beta1:0.45.0.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-cloud-speech-v1p1beta1:0.45.0.classpath"/>
+    <path refid="library.maven:_com.google.api.grpc:proto-google-cloud-speech-v1:0.45.0.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-netty-shaded:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-core:1.17.1.classpath"/>
+    <path refid="library.maven:_io.opencensus:opencensus-contrib-grpc-metrics:0.17.0.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-stub:1.17.1.classpath"/>
+    <path refid="library.maven:_io.grpc:grpc-auth:1.17.1.classpath"/>
+    <path refid="library.maven:_javax.annotation:javax.annotation-api:1.2.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-storage:1.59.0.classpath"/>
+    <path refid="library.maven:_com.google.cloud:google-cloud-core-http:1.59.0.classpath"/>
+    <path refid="library.maven:_com.google.auth:google-auth-library-oauth2-http:0.12.0.classpath"/>
+    <path refid="library.maven:_com.google.oauth-client:google-oauth-client:1.27.0.classpath"/>
+    <path refid="library.maven:_com.google.api-client:google-api-client:1.27.0.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client-appengine:1.27.0.classpath"/>
+    <path refid="library.maven:_com.google.http-client:google-http-client-jackson2:1.27.0.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.9.6.classpath"/>
+    <path refid="library.maven:_com.google.api:gax-httpjson:0.52.1.classpath"/>
+    <path refid="library.maven:_io.opencensus:opencensus-api:0.15.0.classpath"/>
+    <path refid="library.maven:_io.opencensus:opencensus-contrib-http-util:0.15.0.classpath"/>
+    <path refid="library.maven:_com.google.apis:google-api-services-storage:v1-rev20181013-1.27.0.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.producer">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.producer">
+    <patternset refid="excluded.from.module.producer"/>
+  </patternset>
+  
+  <path id="producer.module.sourcepath">
+    <dirset dir="${module.producer.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="producer.module.test.sourcepath">
+    <dirset dir="${module.producer.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.producer" depends="compile.module.producer.production,compile.module.producer.tests" description="Compile module producer"/>
+  
+  <target name="compile.module.producer.production" depends="register.custom.compilers" description="Compile module producer; production classes">
+    <mkdir dir="${producer.output.dir}"/>
+    <javac2 destdir="${producer.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.producer}/javac">
+      <compilerarg line="${compiler.args.producer}"/>
+      <bootclasspath refid="producer.module.bootclasspath"/>
+      <classpath refid="producer.module.production.classpath"/>
+      <src refid="producer.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.producer"/>
+    </javac2>
+    
+    <copy todir="${producer.output.dir}">
+      <fileset dir="${module.producer.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.producer.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.producer.tests" depends="register.custom.compilers,compile.module.producer.production" description="compile module producer; test classes" unless="skip.tests">
+    <mkdir dir="${producer.testoutput.dir}"/>
+    <javac2 destdir="${producer.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.producer}/javac">
+      <compilerarg line="${compiler.args.producer}"/>
+      <bootclasspath refid="producer.module.bootclasspath"/>
+      <classpath refid="producer.module.classpath"/>
+      <src refid="producer.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.producer"/>
+    </javac2>
+    
+    <copy todir="${producer.testoutput.dir}">
+      <fileset dir="${module.producer.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.producer" description="cleanup module">
+    <delete dir="${producer.output.dir}"/>
+    <delete dir="${producer.testoutput.dir}"/>
+  </target>
+</project>
